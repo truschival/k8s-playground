@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hawkbit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       app: hawkbit
+  template:
+    metadata:
+      labels:
+        app: hawkbit
+    spec:
+      containers:
+      - args:
+        - --hawkbit.server.ddi.security.authentication.anonymous.enabled=true
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql:3306/hawkbit
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: secrets.hawkbit
+              key: mysql.username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets.hawkbit
+              key: mysql.pwd
+        - name: SPRING_RABBITMQ_HOST
+          value: rabbitmq
+        - name: SPRING_RABBITMQ_PASSWORD
+          value: guest
+        - name: SPRING_RABBITMQ_USERNAME
+          value: guest
+        image: hawkbit/hawkbit-update-server:latest-mysql
+        name: hawkbit
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always

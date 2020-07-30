@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+secretGenerator:
+- name: mysqlsecret.hawkbit
+  literals:
+    - username=admin
+    - password=secret
+    
+configMapGenerator:
+- name: example-configmap-2
+  literals:
+  - FOO=Bar
+
+# Create a namespace with apps  
+namespace: hawkbit
+namePrefix: dev-
+nameSuffix: "-001"
+commonLabels:
+  app: hawkbit
+resources:
+- deployment.yaml
+
+
