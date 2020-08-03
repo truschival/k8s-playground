@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+secretGenerator:
+- name: secrets-hawkbit
+  literals:
+    - mysql.user=root
+    - mysql.pwd=secret
+    
+configMapGenerator:
+- name: configmap-hawkbit
+  literals:
+  - DATABASE_NAME=hawkbit-db
+
+namespace: hawk
+resources:
+  - hawkbit-deployment.yaml
+  - hawkbit-service.yaml
+  - mysql-pvc.yaml
+  - mysql-service.yaml
+  - mysql-deployment.yaml
