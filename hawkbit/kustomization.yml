@@ -11,7 +11,6 @@ configMapGenerator:
   literals:
   - DATABASE_NAME=hawkbit-db
 
-namespace: hawk
 resources:
   - hawkbit-deployment.yaml
   - hawkbit-service.yaml

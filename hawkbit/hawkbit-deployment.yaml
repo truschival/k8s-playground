@@ -20,17 +20,17 @@ spec:
         - --hawkbit.dmf.rabbitmq.enabled=false
         env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql:3306/hawkbit-db
+          value: jdbc:mysql://mysql:3306/hawkbit-db?allowPublicKeyRetrieval=true&useSSL=false
         - name: SPRING_DATASOURCE_USERNAME
           valueFrom:
             secretKeyRef:
               name: secrets-hawkbit
               key: mysql.user
-        # - name: SPRING_DATASOURCE_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: secrets-hawkbit
-        #       key: mysql.pwd
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-hawkbit
+              key: mysql.pwd
         ports:
         - containerPort: 8080
           name: hawkbit-web
