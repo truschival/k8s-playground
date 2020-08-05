@@ -16,6 +16,7 @@ spec:
       - image: hawkbit/hawkbit-update-server:latest-mysql
         name: hawkbit
         args:
+        - -Dspring.config.additional-location="/opt/hawkbit/data/application.properties"
         - --hawkbit.server.ddi.security.authentication.anonymous.enabled=true
         - --hawkbit.dmf.rabbitmq.enabled=false
         env:
@@ -34,3 +35,14 @@ spec:
         ports:
         - containerPort: 8080
           name: hawkbit-web
+        volumeMounts:
+          - name: config-volume
+            mountPath: /opt/hawkbit/data
+            readOnly: true
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configmap-hawkbit
+            items:
+              - key: application.properties
+                path: application.properties     
