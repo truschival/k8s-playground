@@ -8,4 +8,4 @@ spec:
     targetPort: 8080
   selector:
     app: hawkbit
-  type: LoadBalancer
+  type: ClusterIP

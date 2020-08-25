@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: hawkbit-cert
+spec:
+  secretName: hawkbit-cert-sec
+  dnsNames:
+    - hawkbit.192.168.178.3.xip.io
+  issuerRef:
+#    name: letsencrypt
+    name: selfsigned-issuer
+    kind: Issuer

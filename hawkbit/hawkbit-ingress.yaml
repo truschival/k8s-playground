@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hawkbit-ingress
+  namespace: hawkbit
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/issuer: "self-signed-issuer"
+spec:
+  rules:
+  - host: hawkbit.192.168.178.3.xip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hawkbit
+          servicePort: 8080
+  tls:
+  - hosts:
+    - hawkbit.192.168.178.3.xip.io
+    secretName: hawkbit-cert-sec

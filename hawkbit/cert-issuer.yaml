@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1alpha2
+# Could also be ClusterIssuer but I want a namespace local
+kind: Issuer
+metadata:
+#  name: letsencrypt
+   name: self-signed-issuer
+spec:
+  # acme:
+  #   # You must replace this email address with your own.
+  #   # Let's Encrypt will use this to contact you about expiring
+  #   # certificates, and issues related to your account.
+  #   email: thomas@ruschival.de
+  #   server: https://acme-staging-v02.api.letsencrypt.org/directory
+  #   privateKeySecretRef:
+  #     # Secret resource used to store the account's private key.
+  #     name: letsencrypt-issuer-account-key
+  #   solvers:
+  #   - http01:
+  #       ingress:
+  #         class: traefik
+  selfSigned: {}

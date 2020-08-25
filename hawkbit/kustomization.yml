@@ -13,10 +13,14 @@ configMapGenerator:
     - application.properties
   literals:
     - DATABASE_NAME=hawkbit-db
-    
+
+namespace: hawkbit    
 resources:
-  - hawkbit-deployment.yaml
-  - hawkbit-service.yaml
+  - cert-issuer.yaml
+  - hawkbit-certificate.yaml
   - mysql-pvc.yaml
   - mysql-service.yaml
-  - mysql-deployment.yaml
+  - mysql-deployment.yaml  
+  - hawkbit-deployment.yaml
+  - hawkbit-service.yaml
+  - hawkbit-ingress.yaml
